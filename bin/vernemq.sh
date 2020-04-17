@@ -149,6 +149,8 @@ trap 'siguser1_handler' SIGUSR1
 trap 'sigterm_handler' SIGTERM
 
 # Start VerneMQ
-/vernemq/bin/vernemq console -noshell -noinput $@
+/vernemq/bin/vernemq console -noshell -noinput $@ &
 pid=$(ps aux | grep '[b]eam.smp' | awk '{print $2}')
+sleep 45 && echo "Adding API_KEY..." && /vernemq/bin/vmq-admin api-key add key=${API_KEY:-DEFAULT}
+vmq-admin api-key show
 wait $pid
