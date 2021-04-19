@@ -55,6 +55,7 @@ Parameter | Description | Default
 `image.pullPolicy` | container image pull policy | `IfNotPresent`
 `image.repository` | container image repository | `vernemq/vernemq`
 `image.tag` | container image tag | the current versions (e.g. `1.11.0`)
+`imagePullSecrets` | Image pull secrets for the Pod | `[]`
 `ingress.enabled` | whether to enable an ingress object to route to the WebSocket service. Requires an ingress controller and the WebSocket service to be enabled. | `false`
 `ingress.labels` | additional ingress labels | `{}`
 `ingress.annotations` | additional service annotations | `{}`

@@ -9,6 +9,9 @@ image:
   tag: 1.11.0-alpine
   pullPolicy: IfNotPresent
 
+# Image pull secrets for the Pod
+imagePullSecrets: []
+
 nameOverride: ""
 fullnameOverride: ""
 
