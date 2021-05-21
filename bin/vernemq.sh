@@ -132,6 +132,9 @@ EOF
     echo "########## End ##########" >>/vernemq/etc/vernemq.conf
 fi
 
+mkdir -p /vernemq/data/home
+chmod g-rwx /vernemq/data/home/.erlang.cookie
+
 # Check configuration file
 /vernemq/bin/vernemq config generate 2>&1 >/dev/null | tee /tmp/config.out | grep error
 
