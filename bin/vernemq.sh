@@ -46,6 +46,15 @@ if env | grep "DOCKER_VERNEMQ_KUBERNETES_INSECURE" -q; then
     insecure="--insecure"
 fi
 
+if env | grep "DOCKER_VERNEMQ_KUBERNETES_ISTIO_ENABLED" -q; then
+    istio_health
+    while [ $status != 0 ]; do
+        istio_health
+        sleep 1
+    done
+    echo "Istio ready"
+fi
+
 if env | grep "DOCKER_VERNEMQ_DISCOVERY_KUBERNETES" -q; then
     DOCKER_VERNEMQ_KUBERNETES_CLUSTER_NAME=${DOCKER_VERNEMQ_KUBERNETES_CLUSTER_NAME:-cluster.local}
     # Let's get the namespace if it isn't set
@@ -142,6 +151,13 @@ if [ $? -ne 1 ]; then
 fi
 
 pid=0
+
+# Check istio readiness
+istio_health () {
+  cmd=$(curl -s http://localhost:15021/healtz/ready > /dev/null)
+  status=$?
+  return $status
+}
 
 # SIGUSR1-handler
 siguser1_handler() {

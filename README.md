@@ -54,6 +54,7 @@ This allows a newly started container to automatically join a VerneMQ cluster. A
 
 (Note, you can find the IP of a docker container using `docker inspect <containername/cid> | grep \"IPAddress\"`).
 
+
 ### 4. Automated clustering on Kubernetes without helm
 
 When running VerneMQ inside Kubernetes, it is possible to cause pods matching a specific label to cluster altogether automatically.
@@ -92,6 +93,8 @@ When enabling Kubernetes autoclustering, don't set ```DOCKER_VERNEMQ_DISCOVERY_N
 > ...
 > ```
 If using an vernemq.conf.local file, you can insert a placeholder (`###IPADDRESS###`) in your config to be replaced (at POD creation time) with the actual IP address of the POD vernemq is running on, making VMQ clustering possible.
+
+If istio is enabled you, set `DOCKER_VERNEMQ_KUBERNETES_ISTIO_ENABLED=1` so the init script will check if istio is ready.
 
 ### 5. Using [Docker Swarm](https://docs.docker.com/engine/swarm/)
 
